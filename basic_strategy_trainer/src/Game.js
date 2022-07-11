@@ -20,15 +20,17 @@ class Game extends Component {
     ],
   };
   render() {
-    let randIdx = Math.floor(Math.random() * this.cards.props.length);
-    let dealer = this.cards.props.length[randIdx][0];
-    let player = this.cards.props.length[randIdx][0];
+    let randIdx1 = Math.floor(Math.random() * this.props.cards.length);
+    let randIdx2 = Math.floor(Math.random() * this.props.cards.length);
+    let dealer = this.props.cards[randIdx1];
+    let player = this.props.cards[randIdx2];
 
     return (
       <div>
-        <Card />
-        <Card />
+        <Card card={dealer} />
+        <Card card={player} />
       </div>
     );
   }
 }
+export default Game;
