@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Card from "./Card";
+import { firstDeal } from "./helper";
+import Hand from "./Hand";
 
 class Game extends Component {
   static defaultProps = {
@@ -20,15 +21,18 @@ class Game extends Component {
     ],
   };
   render() {
-    let randIdx1 = Math.floor(Math.random() * this.props.cards.length);
-    let randIdx2 = Math.floor(Math.random() * this.props.cards.length);
-    let dealer = this.props.cards[randIdx1];
-    let player = this.props.cards[randIdx2];
+    let deal = firstDeal(this.props.cards);
+
+    let dealerHand = deal.slice(0, 2);
+    let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
+
+    let playerHand = deal.slice(2);
+    let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
 
     return (
       <div>
-        <Card card={dealer} />
-        <Card card={player} />
+        <Hand cards={dealerHand} />
+        <Hand cards={playerHand} />
       </div>
     );
   }
