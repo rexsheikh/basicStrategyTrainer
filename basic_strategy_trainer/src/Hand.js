@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Card from "./Card";
+import "./Hand.css";
 
 class Hand extends Component {
   render() {
+    // console.log(this.props.cards);
     return (
-      <div className="Hand">
+      <div className="Hand-cards">
         {this.props.cards.map((c) => (
-          <Card name={c.name} />
+          <Card score={c.score} img={c.img} />
         ))}
       </div>
     );

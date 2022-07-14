@@ -3,9 +3,12 @@ import "./Card.css";
 
 class Card extends Component {
   render() {
+    // console.log(`card: ${JSON.stringify(this.props.score)}`);
     return (
       <div className="Card">
-        <h1>{this.props.name}</h1>
+        <div className="Card-img">
+          <img src={this.props.img} />
+        </div>
       </div>
     );
   }

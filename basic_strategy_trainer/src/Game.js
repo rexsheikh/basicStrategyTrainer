@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { firstDeal } from "./helper";
+import deck from "./deck";
 import Hand from "./Hand";
 
 class Game extends Component {
@@ -94,7 +95,7 @@ class Game extends Component {
         7: "double",
         8: "double",
         9: "double",
-        10: "hit",
+        10: "double",
       },
       12: {
         2: "hit",
@@ -267,13 +268,15 @@ class Game extends Component {
     },
   };
   render() {
-    let deal = firstDeal(this.props.cards);
-
+    let deal = firstDeal(deck);
+    // console.log(`deal: ${JSON.stringify(deal)}`);
     let dealerHand = deal.slice(0, 2);
-    let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
+    // let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
+    // console.log(`dealerHand = ${JSON.stringify(dealerHand)}`);
 
     let playerHand = deal.slice(2);
-    let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
+    // let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
+    // console.log(`playerHand = ${JSON.stringify(playerHand)}`);
 
     return (
       <div>
