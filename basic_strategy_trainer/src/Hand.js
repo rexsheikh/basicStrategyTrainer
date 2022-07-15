@@ -4,9 +4,14 @@ import "./Hand.css";
 
 class Hand extends Component {
   render() {
-    // console.log(this.props.cards);
+    let title;
+    if (this.props.blackJack) {
+      title = <h1>BLACKJACK</h1>;
+    }
+
     return (
       <div className="Hand-cards">
+        {title}
         {this.props.cards.map((c) => (
           <Card score={c.score} img={c.img} />
         ))}

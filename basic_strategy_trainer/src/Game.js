@@ -5,20 +5,6 @@ import Hand from "./Hand";
 
 class Game extends Component {
   static defaultProps = {
-    cards: [
-      { name: "two", score: 2 },
-      { name: "three", score: 3 },
-      { name: "four", score: 4 },
-      { name: "five", score: 5 },
-      { name: "six", score: 6 },
-      { name: "seven", score: 7 },
-      { name: "eight", score: 8 },
-      { name: "nine", score: 9 },
-      { name: "ten", score: 10 },
-      { name: "jack", score: 10 },
-      { name: "queen", score: 10 },
-      { name: "king", score: 10 },
-    ],
     stratChart_hardTotal: {
       5: {
         2: "hit",
@@ -269,19 +255,24 @@ class Game extends Component {
   };
   render() {
     let deal = firstDeal(deck);
-    // console.log(`deal: ${JSON.stringify(deal)}`);
     let dealerHand = deal.slice(0, 2);
-    // let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
-    // console.log(`dealerHand = ${JSON.stringify(dealerHand)}`);
+    let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
 
     let playerHand = deal.slice(2);
-    // let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
-    // console.log(`playerHand = ${JSON.stringify(playerHand)}`);
+    let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
 
     return (
       <div>
-        <Hand cards={dealerHand} />
-        <Hand cards={playerHand} />
+        <Hand
+          cards={dealerHand}
+          aggScore={dealerScore}
+          blackJack={dealerScore === 21}
+        />
+        <Hand
+          cards={playerHand}
+          aggScore={playerScore}
+          blackJack={playerScore === 21}
+        />
       </div>
     );
   }
