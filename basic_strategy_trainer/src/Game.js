@@ -269,7 +269,8 @@ class Game extends Component {
   }
   render() {
     //generate four cards randomly, distribute them to the dealer and the player
-    //and calculate their score
+    //and calculate their score. Set blackJack to true/false.
+    let gameState;
     let deal = firstDeal(deck);
 
     let dealerHand = deal.slice(0, 2);
@@ -278,8 +279,11 @@ class Game extends Component {
     let playerHand = deal.slice(2);
     let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
 
-    //generate response buttons
-    let buttons = this.generateButtons();
+    if (playerScore === 21 || dealerScore === 21) {
+      gameState = "game over";
+    } else {
+      gameState = this.generateButtons();
+    }
 
     return (
       <div>
@@ -293,7 +297,7 @@ class Game extends Component {
           aggScore={playerScore}
           blackJack={playerScore === 21}
         />
-        <p>{buttons}</p>
+        <p>{gameState}</p>
       </div>
     );
   }
