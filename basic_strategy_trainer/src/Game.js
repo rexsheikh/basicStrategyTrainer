@@ -5,7 +5,7 @@ import Hand from "./Hand";
 
 class Game extends Component {
   static defaultProps = {
-    stratChart_hardTotal: {
+    stratChartHardTotal: {
       5: {
         2: "hit",
         3: "hit",
@@ -151,7 +151,7 @@ class Game extends Component {
       },
     },
 
-    stratChart_pairs: {
+    stratChartPairs: {
       2: {
         2: "split",
         3: "split",
@@ -252,6 +252,7 @@ class Game extends Component {
         10: "split",
       },
     },
+    buttons: ["hit", "stand", "double", "split", "surrender"],
   };
   render() {
     let deal = firstDeal(deck);
