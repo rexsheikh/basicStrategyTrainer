@@ -13,8 +13,8 @@ class Hand extends Component {
       <div className="Hand-cards">
         {title}
         {this.props.score}
-        {this.props.cards.map((c, index) => (
-          <Card score={c.score} img={c.img} />
+        {this.props.cards.map((c) => (
+          <Card score={c.score} img={c.img} key={c.name} />
         ))}
       </div>
     );

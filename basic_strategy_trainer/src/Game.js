@@ -252,15 +252,34 @@ class Game extends Component {
         10: "split",
       },
     },
+
     buttons: ["hit", "stand", "double", "split", "surrender"],
   };
+
+  generateButtons() {
+    return this.props.buttons.map((b) => (
+      <button
+        key={b}
+        value={b}
+        //onClick
+      >
+        {b}
+      </button>
+    ));
+  }
   render() {
+    //generate four cards randomly, distribute them to the dealer and the player
+    //and calculate their score
     let deal = firstDeal(deck);
+
     let dealerHand = deal.slice(0, 2);
     let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
 
     let playerHand = deal.slice(2);
     let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
+
+    //generate response buttons
+    let buttons = this.generateButtons();
 
     return (
       <div>
@@ -274,6 +293,7 @@ class Game extends Component {
           aggScore={playerScore}
           blackJack={playerScore === 21}
         />
+        <p>{buttons}</p>
       </div>
     );
   }
