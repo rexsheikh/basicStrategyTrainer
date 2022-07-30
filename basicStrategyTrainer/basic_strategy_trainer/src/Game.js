@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { dealNCards } from "./helper";
+import { firstDeal } from "./helper";
 import deck from "./deck";
 import Hand from "./Hand";
 
@@ -256,11 +256,6 @@ class Game extends Component {
     buttons: ["hit", "stand", "double", "split", "surrender"],
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { playerHand: dealNCards(deck, 2) };
-  }
-
   generateButtons() {
     return this.props.buttons.map((b) => (
       <button
@@ -275,25 +270,34 @@ class Game extends Component {
   render() {
     //generate four cards randomly, distribute them to the dealer and the player
     //and calculate their score. Set blackJack to true/false.
-    // let gameState = "player turn";
-    // let deal = firstDeal(deck);
+    let gameState;
+    let deal = firstDeal(deck);
 
-    // let dealerHand = deal.slice(0, 2);
-    // console.log(dealerHand);
-    // let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
+    let dealerHand = deal.slice(0, 2);
+    let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
 
-    // let playerHand = deal.slice(2);
-    // let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
+    let playerHand = deal.slice(2);
+    let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
 
-    // if (playerScore === 21 || dealerScore === 21) {
-    //   gameState = "game over";
-    // } else {
-    //   gameState = this.generateButtons();
-    // }
+    if (playerScore === 21 || dealerScore === 21) {
+      gameState = "game over";
+    } else {
+      gameState = this.generateButtons();
+    }
 
     return (
       <div>
-        <Hand cards={this.state.playerHand} />
+        <Hand
+          cards={dealerHand}
+          aggScore={dealerScore}
+          blackJack={dealerScore === 21}
+        />
+        <Hand
+          cards={playerHand}
+          aggScore={playerScore}
+          blackJack={playerScore === 21}
+        />
+        <p>{gameState}</p>
       </div>
     );
   }

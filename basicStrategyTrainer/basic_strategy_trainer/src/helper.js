@@ -3,13 +3,13 @@ function randIdx(arr) {
   return arr[randIdx];
 }
 
-function dealNCards(arr, n) {
+function firstDeal(arr) {
   let res = [];
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < 4; i++) {
     let card = randIdx(arr);
     res.push(card);
   }
   return res;
 }
 
-export { randIdx, dealNCards };
+export { randIdx, firstDeal };
