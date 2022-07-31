@@ -261,6 +261,7 @@ class Game extends Component {
     this.state = {
       playerHand: dealNCards(deck, 2, false),
       dealerHand: dealNCards(deck, 1, true),
+      blackJack: false,
     };
   }
 
@@ -276,6 +277,7 @@ class Game extends Component {
     ));
   }
   render() {
+    let gameState;
     //generate four cards randomly, distribute them to the dealer and the player
     //and calculate their score. Set blackJack to true/false.
     // let gameState = "player turn";
@@ -286,18 +288,22 @@ class Game extends Component {
     // let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
 
     // let playerHand = deal.slice(2);
-    // let playerScore = playerHand.reduce((exp, card) => exp + card.score, 0);
+    let playerScore = this.state.playerHand.reduce(
+      (exp, card) => exp + card.score,
+      0
+    );
 
-    // if (playerScore === 21 || dealerScore === 21) {
-    //   gameState = "game over";
-    // } else {
-    //   gameState = this.generateButtons();
-    // }
+    if (playerScore === 21) {
+      gameState = "BLACKJACK";
+    } else {
+      gameState = this.generateButtons();
+    }
 
     return (
       <div>
         <Hand cards={this.state.dealerHand} />
         <Hand cards={this.state.playerHand} />
+        <p>{gameState}</p>
       </div>
     );
   }
