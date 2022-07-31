@@ -258,7 +258,10 @@ class Game extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { playerHand: dealNCards(deck, 2) };
+    this.state = {
+      playerHand: dealNCards(deck, 2, false),
+      dealerHand: dealNCards(deck, 1, true),
+    };
   }
 
   generateButtons() {
@@ -293,6 +296,7 @@ class Game extends Component {
 
     return (
       <div>
+        <Hand cards={this.state.dealerHand} />
         <Hand cards={this.state.playerHand} />
       </div>
     );
