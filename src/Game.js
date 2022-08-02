@@ -262,7 +262,9 @@ class Game extends Component {
       playerHand: dealNCards(deck, 2, false),
       dealerHand: dealNCards(deck, 1, true),
       blackJack: false,
+      eval: "null",
     };
+    this.handleChoice = this.handleChoice.bind(this);
   }
 
   handleChoice(evt) {
@@ -271,14 +273,10 @@ class Game extends Component {
       (exp, card) => exp + card.score,
       0
     );
-
-    if (this.state.playerHand[0] === this.state.playerHand[1]) {
-      console.log("pairs");
-    } else {
-      ///add the ace condition as an else if here
-      console.log("hard total");
-    }
+    let dealerUp = this.state.dealerHand[1].score;
+    let correct = this.props.stratChartHardTotal[playerScore][dealerUp];
   }
+
   generateButtons() {
     return this.props.buttons.map((b) => (
       <button key={b} value={b} onClick={this.handleChoice}>
@@ -288,6 +286,7 @@ class Game extends Component {
   }
   render() {
     let gameState;
+    let evalTest = this.state.eval;
     let playerScore = this.state.playerHand.reduce(
       (exp, card) => exp + card.score,
       0
@@ -304,6 +303,7 @@ class Game extends Component {
         <Hand cards={this.state.dealerHand} />
         <Hand cards={this.state.playerHand} />
         <p>{gameState}</p>
+        <p>{evalTest}</p>
       </div>
     );
   }
