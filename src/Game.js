@@ -240,7 +240,7 @@ class Game extends Component {
         9: "split",
         10: "stand",
       },
-      9: {
+      10: {
         2: "split",
         3: "split",
         4: "split",
@@ -265,29 +265,29 @@ class Game extends Component {
     };
   }
 
+  handleChoice(evt) {
+    let choice = evt.target.value;
+    let playerScore = this.state.playerHand.reduce(
+      (exp, card) => exp + card.score,
+      0
+    );
+
+    if (this.state.playerHand[0] === this.state.playerHand[1]) {
+      console.log("pairs");
+    } else {
+      ///add the ace condition as an else if here
+      console.log("hard total");
+    }
+  }
   generateButtons() {
     return this.props.buttons.map((b) => (
-      <button
-        key={b}
-        value={b}
-        //onClick
-      >
+      <button key={b} value={b} onClick={this.handleChoice}>
         {b}
       </button>
     ));
   }
   render() {
     let gameState;
-    //generate four cards randomly, distribute them to the dealer and the player
-    //and calculate their score. Set blackJack to true/false.
-    // let gameState = "player turn";
-    // let deal = firstDeal(deck);
-
-    // let dealerHand = deal.slice(0, 2);
-    // console.log(dealerHand);
-    // let dealerScore = dealerHand.reduce((exp, card) => exp + card.score, 0);
-
-    // let playerHand = deal.slice(2);
     let playerScore = this.state.playerHand.reduce(
       (exp, card) => exp + card.score,
       0
