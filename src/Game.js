@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { dealNCards } from "./helper";
 import deck from "./deck";
 import Hand from "./Hand";
+//TODO
+//eval the choice
+//determine which chart to look in
+// space bar to redeal after bet
+//count the streak
+//styling
 
 class Game extends Component {
   static defaultProps = {
@@ -268,13 +274,25 @@ class Game extends Component {
   }
 
   handleChoice(evt) {
+    let correct;
+    let numString;
     let choice = evt.target.value;
     let playerScore = this.state.playerHand.reduce(
       (exp, card) => exp + card.score,
       0
     );
     let dealerUp = this.state.dealerHand[1].score;
-    let correct = this.props.stratChartHardTotal[playerScore][dealerUp];
+    if (this.state.playerHand[0] === this.state.playerHand[1]) {
+      numString = this.state.playerHand[0].score.toString();
+      correct = this.props.stratChartPairs[numString][this.props.dealerUp];
+    } else {
+      correct = this.props.stratChartHardTotal[playerScore][dealerUp];
+    }
+    if (correct !== choice) {
+      console.log("wrong");
+    } else {
+      console.log("right");
+    }
   }
 
   generateButtons() {
